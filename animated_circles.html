@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Canvas border */
+      canvas {
+        border: 5px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- canvas world dimension -->
+    <canvas id="canvas" width="700" height="350" />
+    <script>
+      function draw() {
+        //grab the canvas and put in the 2d context
+        var ctx = document.getElementById("canvas").getContext("2d");
+
+        // Create gradients
+
+        //path variables yellow circle
+        let xy = 150;
+        let yy = 150;
+        let ay = 150;
+        let by = 150;
+
+        //path variables blue circle
+        let xb = 95;
+        let ab = 102;
+
+        //path variables green circle
+        let yg = 45;
+        let bg = 50;
+
+        //path variables pink circle
+        let xp = 105;
+        let yp = 105;
+        let ap = 112;
+        let bp = 120;
+
+        setInterval(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height); // redraw the whole canvas
+
+          //green circle
+          var radgrad = ctx.createRadialGradient(45, yg, 10, 52, bg, 30);
+          radgrad.addColorStop(0, "#A7D30C");
+          radgrad.addColorStop(0.9, "#019F62");
+          radgrad.addColorStop(1, "rgba(1, 159, 98, 0)");
+
+          //green and pink
+          var radgrad2 = ctx.createRadialGradient(xp, yp, 20, ap, bp, 50);
+          radgrad2.addColorStop(0, "#FF5F98");
+          radgrad2.addColorStop(0.75, "#FF0188");
+          radgrad2.addColorStop(1, "rgba(255, 1, 136, 0)");
+
+          //blue circle
+          var radgrad3 = ctx.createRadialGradient(xb, 35, 15, ab, 40, 40);
+          radgrad3.addColorStop(0, "#00C9FF");
+          radgrad3.addColorStop(0.8, "#00B5E2");
+          radgrad3.addColorStop(1, "rgba(0, 201, 255, 0)");
+
+          // yellow and all the circles
+          var radgrad4 = ctx.createRadialGradient(xy, yy, 50, ay, by, 90);
+          radgrad4.addColorStop(0, "#F4F201");
+          radgrad4.addColorStop(0.8, "#E4C700");
+          radgrad4.addColorStop(1, "rgba(228, 199, 0, 0)");
+
+          // draw shapes
+          ctx.fillStyle = radgrad4;
+          ctx.fillRect(0, 0, 700, 350);
+          ctx.fillStyle = radgrad3;
+          ctx.fillRect(0, 0, 700, 350);
+          ctx.fillStyle = radgrad2;
+          ctx.fillRect(0, 0, 700, 350);
+          ctx.fillStyle = radgrad;
+          ctx.fillRect(0, 0, 700, 350);
+
+          //update the world of yellow circle x coord
+          if (yy >= 350 || by >= 350) {
+            yy = 0;
+            by = 0;
+          }
+
+          //update the world of yellow circle y coord
+          if (xy >= 700 || ay >= 700) {
+            xy = 0;
+            ay = 0;
+          }
+
+          //update the world of blue circle x coord
+          if (xb <= 0 || ab <= 0) {
+            xb = 700;
+            ab = 700;
+          }
+
+          //update the world of green circle y coord
+          if (yg >= 350 || bg >= 350) {
+            yg = 0;
+            bg = 0;
+          }
+
+          //update the world of pink circle y coord
+          if (yp <= 0 || bp <= 0) {
+            yp = 350;
+            bp = 350;
+          }
+
+          //update the world of pink circle x coord
+          if (xp <= 0 || ap <= 0) {
+            xp = 700;
+            ap = 700;
+          }
+
+          //direction for yellow circle
+          xy = xy + 3;
+          yy = yy + 3;
+          ay = ay + 3;
+          by = by + 3;
+
+          //direction for blue circle
+          xb = xb - 5;
+          ab = ab - 5;
+
+          //direction for green circle
+          yg = yg + 3;
+          bg = bg + 3;
+
+          //direction for pink circle
+          xp = xp - 2;
+          yp = yp - 1;
+          ap = ap - 2;
+          bp = bp - 1;
+        }, 10);
+      }
+
+      draw();
+    </script>
+  </body>
+</html>
